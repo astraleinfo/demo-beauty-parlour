@@ -432,33 +432,392 @@
       font-family: var(--serif); font-size: 1.3rem; font-style: italic; color: var(--blush);
     }
 
+    /* ── HAMBURGER MENU ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 200;
+      padding: 8px;
+    }
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: var(--cream);
+      transition: all 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100vh;
+      background: rgba(10,10,10,0.97);
+      backdrop-filter: blur(20px);
+      z-index: 150;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--blush); }
+
     /* ── RESPONSIVE ── */
+
+    /* Tablet landscape */
     @media(max-width:1024px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-left { padding: 140px 6vw 60px; text-align: center; align-items: center; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left {
+        padding: 140px 6vw 60px;
+        text-align: center; align-items: center;
+        order: 2;
+      }
       .hero-p { margin-left: auto; margin-right: auto; }
       .hero-btns { justify-content: center; }
-      .hero-right { height: 50vh; }
+      .hero-right { height: 50vh; order: 1; }
       .hero-img-main { width: 100%; height: 100%; border-radius: 0; }
       .hero-img-float, .hero-badge-card { display: none; }
     }
+
+    /* Tablet portrait */
     @media(max-width:992px) {
       .nav-menu { display: none; }
+      .hamburger { display: flex; }
+      .nav { padding: 20px 24px; }
+      .nav.solid { padding: 14px 24px; }
+
       .sec { padding: 80px 24px; }
-      .srv-grid, .team-grid { grid-template-columns: repeat(2, 1fr); }
+
+      /* About — stack vertically */
+      #about { padding-left: 24px; padding-right: 24px; }
+      #about > div { flex-direction: column !important; gap: 40px !important; }
+      #about > div > div { flex: none !important; width: 100% !important; }
+      #about img { height: 400px !important; }
+
+      .srv-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
       .ft-grid { grid-template-columns: 1fr 1fr; }
+
       .gal-row { flex-direction: column; }
       .gal-card { height: 300px; }
+
+      .sec-title { font-size: 2rem; }
+      .cta h2 { font-size: 2rem; }
     }
+
+    /* Mobile */
     @media(max-width:768px) {
-      .nav { padding: 16px 24px; }
-      .srv-grid, .team-grid, .ft-grid { grid-template-columns: 1fr; }
+      .nav { padding: 16px 20px; }
+      .nav.solid { padding: 12px 20px; }
+      .nav-cta { padding: 8px 18px; font-size: 0.7rem; }
+
+      .hero-left { padding: 120px 20px 40px; }
+      .hero-h1 { font-size: 2.4rem; }
+      .hero-p { font-size: 1rem; margin-bottom: 28px; }
+      .h-btn { padding: 14px 28px; font-size: 0.75rem; }
+      .hero-right { height: 40vh; }
+
+      .sec { padding: 60px 20px; }
+      .sec-head { margin-bottom: 40px; }
+      .sec-tag { font-size: 0.65rem; letter-spacing: 3px; }
+      .sec-title { font-size: 1.8rem; }
+
+      /* About */
+      #about { padding-left: 20px !important; padding-right: 20px !important; max-width: 100% !important; }
+      #about img { height: 300px !important; border-radius: 16px !important; }
+
+      /* Services */
+      .srv-grid { grid-template-columns: 1fr; gap: 20px; }
+      .srv-card { padding: 36px 24px; }
+      .srv-ic { width: 56px; height: 56px; }
+      .srv-card h3 { font-size: 1.25rem; }
+
+      /* Gallery */
+      .gal-card { height: 250px; }
+      .gal-info h4 { font-size: 1.3rem; }
+
+      /* Team */
+      .team-grid { grid-template-columns: 1fr; gap: 32px; }
+      .t-img-wrap { height: 350px; }
+
+      /* CTA */
+      .cta { padding: 80px 20px; }
+      .cta h2 { font-size: 1.8rem; }
+      .cta-btn { padding: 14px 32px; font-size: 0.75rem; }
+
+      /* Footer */
+      footer { padding: 60px 20px 24px; }
+      .ft-grid { grid-template-columns: 1fr; gap: 40px; }
       .ft-bottom { flex-direction: column; gap: 8px; text-align: center; }
-      .hero-h1 { font-size: 2.6rem; }
+
+      /* Lightbox */
+      .lb-x { top: 16px; right: 20px; font-size: 2rem; }
+      .lb-cap { font-size: 1rem; bottom: 24px; }
+
+      /* Marquee smaller */
+      .marquee { padding: 12px 0; }
+      .m-item { font-size: 0.7rem; gap: 16px; padding: 0 16px; }
+    }
+
+    /* Small phones */
+    @media(max-width:480px) {
+      .hero-left { padding: 110px 16px 32px; }
+      .hero-h1 { font-size: 2rem; margin-bottom: 16px; }
+      .hero-p { font-size: 0.92rem; }
+      .hero-btns { flex-direction: column; width: 100%; }
+      .h-btn { width: 100%; text-align: center; padding: 14px 20px; }
+      .hero-right { height: 35vh; }
+
+      .sec { padding: 50px 16px; }
+      .sec-title { font-size: 1.6rem; }
+
+      .srv-card { padding: 32px 20px; }
+      .srv-price { font-size: 1.2rem; }
+
+      .gal-card { height: 220px; }
+      .t-img-wrap { height: 300px; }
+
+      .cta { padding: 60px 16px; }
+      .cta h2 { font-size: 1.5rem; }
+      .cta p { font-size: 0.92rem; }
+      .cta-btn { padding: 12px 24px; font-size: 0.72rem; }
+
+      footer { padding: 48px 16px 20px; }
+      .ft-col h5 { margin-bottom: 16px; }
+    }
+
+    /* ── BOOKING MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 10000;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      display: none; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.show { display: flex; }
+
+    .modal {
+      background: #111;
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 20px;
+      width: 100%; max-width: 520px;
+      max-height: 90vh; overflow-y: auto;
+      padding: 48px 40px;
+      position: relative;
+      animation: modalIn 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    @keyframes modalIn { from{transform:translateY(40px) scale(0.95);opacity:0} to{transform:translateY(0) scale(1);opacity:1} }
+
+    .modal-close {
+      position: absolute; top: 20px; right: 24px;
+      font-size: 1.8rem; color: var(--muted);
+      cursor: pointer; transition: all 0.3s;
+      background: none; border: none;
+    }
+    .modal-close:hover { color: var(--blush); transform: rotate(90deg); }
+
+    .modal-header {
+      text-align: center; margin-bottom: 32px;
+    }
+    .modal-header .sec-tag { margin-bottom: 8px; }
+    .modal-header h3 {
+      font-family: var(--serif); font-size: 2rem;
+      font-weight: 400; color: var(--cream);
+    }
+    .modal-header p {
+      color: var(--muted); font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block; font-size: 0.72rem;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--blush); margin-bottom: 8px; font-weight: 500;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 14px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 10px;
+      color: var(--cream);
+      font-family: var(--sans); font-size: 0.95rem;
+      transition: border-color 0.3s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blush);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255,255,255,0.25);
+    }
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23D4AF37' viewBox='0 0 24 24'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      cursor: pointer;
+    }
+    .form-group select option {
+      background: #111; color: var(--cream);
+    }
+    .form-group textarea {
+      resize: vertical; min-height: 80px;
+    }
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+
+    .modal-submit {
+      width: 100%; padding: 16px;
+      background: var(--blush); color: var(--dark);
+      border: none; border-radius: 100px;
+      font-family: var(--sans); font-size: 0.82rem;
+      font-weight: 600; text-transform: uppercase;
+      letter-spacing: 2px; cursor: pointer;
+      transition: all 0.4s; margin-top: 8px;
+    }
+    .modal-submit:hover {
+      background: var(--rose);
+      box-shadow: 0 8px 30px rgba(212,175,55,0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Success State */
+    .modal-success {
+      text-align: center; padding: 40px 20px;
+      display: none;
+    }
+    .modal-success.show { display: block; }
+    .modal-form.hide { display: none; }
+
+    .success-icon {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blush), var(--rose));
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px; font-size: 2.5rem; color: var(--dark);
+      animation: successPop 0.5s 0.2s cubic-bezier(0.25,0.46,0.45,0.94) both;
+    }
+    @keyframes successPop { from{transform:scale(0)} to{transform:scale(1)} }
+
+    .modal-success h3 {
+      font-family: var(--serif); font-size: 1.8rem;
+      color: var(--cream); margin-bottom: 12px;
+    }
+    .modal-success p {
+      color: var(--muted); font-size: 0.95rem;
+      line-height: 1.7; margin-bottom: 8px;
+    }
+    .modal-success .booked-detail {
+      display: inline-block; margin-top: 16px;
+      padding: 12px 28px; background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 100px;
+      font-size: 0.8rem; color: var(--blush);
+      font-weight: 500; letter-spacing: 1px;
+    }
+
+    @media(max-width:768px) {
+      .modal { padding: 36px 24px; }
+      .modal-header h3 { font-size: 1.6rem; }
+      .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeBooking()">&times;</button>
+
+    <!-- Form -->
+    <div class="modal-form" id="bookingForm">
+      <div class="modal-header">
+        <span class="sec-tag">Reservation</span>
+        <h3>Book Your Appointment</h3>
+        <p>Fill in your details and we'll confirm your booking shortly.</p>
+      </div>
+
+      <form onsubmit="submitBooking(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="bName" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" id="bPhone" placeholder="+91 98765 43210" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="bEmail" placeholder="you@email.com" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Service</label>
+          <select id="bService" required>
+            <option value="" disabled selected>Choose a service</option>
+            <option value="Signature Facial — ₹2,499">Signature Facial — ₹ 2,499</option>
+            <option value="Hair Artistry — ₹1,999">Hair Artistry — ₹ 1,999</option>
+            <option value="Bridal Makeup — ₹14,999">Bridal Makeup — ₹ 14,999</option>
+            <option value="Spa & Massage — ₹3,499">Spa &amp; Massage — ₹ 3,499</option>
+            <option value="Luxury Nail Art — ₹1,299">Luxury Nail Art — ₹ 1,299</option>
+            <option value="Skin Rejuvenation — ₹4,999">Skin Rejuvenation — ₹ 4,999</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Preferred Date</label>
+            <input type="date" id="bDate" required>
+          </div>
+          <div class="form-group">
+            <label>Preferred Time</label>
+            <input type="time" id="bTime" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Special Requests (Optional)</label>
+          <textarea id="bMsg" placeholder="Any special requests or notes..."></textarea>
+        </div>
+
+        <button type="submit" class="modal-submit">Confirm Booking</button>
+      </form>
+    </div>
+
+    <!-- Success -->
+    <div class="modal-success" id="bookingSuccess">
+      <div class="success-icon"><i class="ri-check-line"></i></div>
+      <h3>Booking Confirmed!</h3>
+      <p>Thank you, <strong id="sName"></strong>!</p>
+      <p>We've received your appointment request. Our team will contact you at <strong id="sPhone"></strong> to confirm.</p>
+      <div class="booked-detail" id="sDetail"></div>
+    </div>
+
+  </div>
+</div>
 
 <!-- LIGHTBOX -->
 <div class="lb" id="lb">
@@ -476,8 +835,22 @@
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#team">Artists</a></li>
   </ul>
-  <a href="#cta" class="nav-cta">Book Now</a>
+  <a href="javascript:void(0)" class="nav-cta" onclick="openBooking()">Book Now</a>
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#gallery" onclick="closeMenu()">Gallery</a>
+  <a href="#team" onclick="closeMenu()">Artists</a>
+  <a href="javascript:void(0)" onclick="closeMenu();openBooking()" style="color:var(--blush)">Book Now</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -555,42 +928,42 @@
       <h3>Signature Facial</h3>
       <p>Deep cleansing and hydration with exclusive organic serums tailored for your skin.</p>
       <span class="srv-price">₹ 2,499</span>
-      <a href="#cta" class="srv-btn">Book Now</a>
+      <a href="javascript:void(0)" class="srv-btn" onclick="openBooking()">Book Now</a>
     </div>
     <div class="srv-card" data-aos="fade-up" data-aos-delay="100">
       <div class="srv-ic"><i class="ri-scissors-cut-line"></i></div>
       <h3>Hair Artistry</h3>
       <p>Precision cutting, vibrant coloring, and restorative keratin treatments.</p>
       <span class="srv-price">₹ 1,999</span>
-      <a href="#cta" class="srv-btn">Book Now</a>
+      <a href="javascript:void(0)" class="srv-btn" onclick="openBooking()">Book Now</a>
     </div>
     <div class="srv-card" data-aos="fade-up" data-aos-delay="200">
       <div class="srv-ic"><i class="ri-women-line"></i></div>
       <h3>Bridal Makeup</h3>
       <p>Flawless, long-lasting makeup for your most special day.</p>
       <span class="srv-price">₹ 14,999</span>
-      <a href="#cta" class="srv-btn">Book Now</a>
+      <a href="javascript:void(0)" class="srv-btn" onclick="openBooking()">Book Now</a>
     </div>
     <div class="srv-card" data-aos="fade-up" data-aos-delay="0">
       <div class="srv-ic"><i class="ri-drop-line"></i></div>
       <h3>Spa & Massage</h3>
       <p>Hot stone therapy, deep tissue massage, and aromatherapy bliss.</p>
       <span class="srv-price">₹ 3,499</span>
-      <a href="#cta" class="srv-btn">Book Now</a>
+      <a href="javascript:void(0)" class="srv-btn" onclick="openBooking()">Book Now</a>
     </div>
     <div class="srv-card" data-aos="fade-up" data-aos-delay="100">
       <div class="srv-ic"><i class="ri-magic-line"></i></div>
       <h3>Luxury Nail Art</h3>
       <p>Exquisite manicures and pedicures with detailed nail art.</p>
       <span class="srv-price">₹ 1,299</span>
-      <a href="#cta" class="srv-btn">Book Now</a>
+      <a href="javascript:void(0)" class="srv-btn" onclick="openBooking()">Book Now</a>
     </div>
     <div class="srv-card" data-aos="fade-up" data-aos-delay="200">
       <div class="srv-ic"><i class="ri-leaf-line"></i></div>
       <h3>Skin Rejuvenation</h3>
       <p>Advanced laser therapy for a youthful, glowing complexion.</p>
       <span class="srv-price">₹ 4,999</span>
-      <a href="#cta" class="srv-btn">Book Now</a>
+      <a href="javascript:void(0)" class="srv-btn" onclick="openBooking()">Book Now</a>
     </div>
   </div>
 </section>
@@ -680,7 +1053,7 @@
     <span class="sec-tag" style="color:var(--blush)">VIP Membership</span>
     <h2>Elevate Your Beauty Routine</h2>
     <p>Join LUMIÈRE VIP for exclusive priority bookings, complimentary touch-ups, and luxury product gifts.</p>
-    <a href="tel:+919876543210" class="cta-btn">Book Your Session — ₹ 999/mo</a>
+    <a href="javascript:void(0)" class="cta-btn" onclick="openBooking()">Book Your Session — ₹ 999/mo</a>
   </div>
 </section>
 
@@ -723,6 +1096,20 @@
   // Nav
   window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('solid', scrollY > 60));
 
+  // Hamburger Menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  function closeMenu() {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
   // Hero GSAP stagger
   const ht = gsap.timeline({ defaults:{ease:'power3.out'} });
   ht.from('#hEye',{y:30,opacity:0,duration:.7,delay:.2})
@@ -762,6 +1149,82 @@
   document.getElementById('lbx').onclick=closeLB;
   lb.addEventListener('click',e=>{if(e.target===lb)closeLB()});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB()});
+
+  // ── BOOKING MODAL ──
+  const bookingModal = document.getElementById('bookingModal');
+  const bookingForm = document.getElementById('bookingForm');
+  const bookingSuccess = document.getElementById('bookingSuccess');
+
+  // Set min date to today
+  const dateInput = document.getElementById('bDate');
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.setAttribute('min', today);
+
+  function openBooking(serviceName) {
+    // Reset to form state
+    bookingForm.classList.remove('hide');
+    bookingSuccess.classList.remove('show');
+    bookingForm.querySelector('form').reset();
+
+    // Pre-select service if passed
+    if (serviceName) {
+      const select = document.getElementById('bService');
+      for (let opt of select.options) {
+        if (opt.value.toLowerCase().includes(serviceName.toLowerCase())) {
+          opt.selected = true;
+          break;
+        }
+      }
+    }
+
+    bookingModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBooking() {
+    bookingModal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  bookingModal.addEventListener('click', e => {
+    if (e.target === bookingModal) closeBooking();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && bookingModal.classList.contains('show')) closeBooking();
+  });
+
+  function submitBooking(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('bName').value;
+    const phone = document.getElementById('bPhone').value;
+    const service = document.getElementById('bService').value;
+    const date = document.getElementById('bDate').value;
+    const time = document.getElementById('bTime').value;
+
+    // Format date nicely
+    const dateObj = new Date(date + 'T' + time);
+    const formattedDate = dateObj.toLocaleDateString('en-IN', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+    const formattedTime = dateObj.toLocaleTimeString('en-IN', {
+      hour: '2-digit', minute: '2-digit', hour12: true
+    });
+
+    // Fill success message
+    document.getElementById('sName').textContent = name;
+    document.getElementById('sPhone').textContent = phone;
+    document.getElementById('sDetail').textContent = service + ' • ' + formattedDate + ' at ' + formattedTime;
+
+    // Switch to success view
+    bookingForm.classList.add('hide');
+    bookingSuccess.classList.add('show');
+  }
+
+
 </script>
 </body>
 </html>
